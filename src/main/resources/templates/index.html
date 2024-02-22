@@ -7,6 +7,21 @@
 <body>
 <h1>스프링 부트로 시작하는 웹 서비스</h1>
 <table class="table table-horizontal table-bordered">
+    <th:block th:if="${session.user != null}">
+
+        <div th:text="${session.user.getName()}"></div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <a th:href="@{logout}" role="button" class="btn btn-info active">로그아웃</a>
+                    <a th:href="@{posts/save}" role="button" class="btn btn-primary">글 등록</a>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <th:block th:if="${session.user==null}">
+        <a th:href="@{oauth2/authorization/google}" role="button" class="btn btn-success">로그인</a>
+    </th:block>
     <thead class="thead-strong">
     <tr>
         <th>게시글 번호</th>
@@ -20,19 +35,12 @@
         <tr>
             <td th:text="${post.id}"></td>
             <td>
-            <a th:href="@{/posts/update/{id}(id= ${post.id})}" th:text="${post.title}"></a>
+                <a th:href="@{/posts/update/{id}(id= ${post.id})}" th:text="${post.title}"></a>
             </td>
             <td th:text="${post.author}"></td>
             <td th:text="${post.modifiedDate}"></td>
         </tr>
         </tbody>
-    </div>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <a th:href="@{posts/save}" role="button" class="btn btn-primary">글 등록</a>
-            </div>
-        </div>
     </div>
 </table>
 </body>
