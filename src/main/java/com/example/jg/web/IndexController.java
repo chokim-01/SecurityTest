@@ -21,6 +21,10 @@ public class IndexController {
             model.addAttribute("userName",user.getName());
         return "index";
     }
+    @GetMapping("/api/v1/signPage")
+    public String index(@LoginUser SessionUser user) {
+        return "user-signIn";
+    }
 
     @GetMapping("/posts/update/{id}")
     public String index(@PathVariable Long id,Model model) {
